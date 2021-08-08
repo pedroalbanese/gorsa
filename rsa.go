@@ -171,7 +171,7 @@ func (rsas *RSASecurity) VerifySignSha256WithRsa(data string, signData string) e
 /**
  * 使用RSAWithSHA512验证签名
  */
-func (rsas *RSASecurity) VerifySignSha256WithRsa(data string, signData string) error {
+func (rsas *RSASecurity) VerifySignSha512WithRsa(data string, signData string) error {
 	sign, err := base64.StdEncoding.DecodeString(signData)
 	if err != nil {
 		return err
