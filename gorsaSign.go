@@ -25,6 +25,18 @@ func SignSha256WithRsa(data string, privateKey string) (string, error) {
     return sign, err
 }
 
+// 使用RSAWithSHA512算法签名
+func SignSha512WithRsa(data string, privateKey string) (string, error) {
+    grsa := RSASecurity{}
+    grsa.SetPrivateKey(privateKey)
+
+    sign, err := grsa.SignSha512WithRsa(data)
+    if err != nil {
+        return "", err
+    }
+    return sign, err
+}
+
 // 使用RSAWithSHA1验证签名
 func VerifySignSha1WithRsa(data string, signData string, publicKey string) error {
     grsa := RSASecurity{}
@@ -37,4 +49,11 @@ func VerifySignSha256WithRsa(data string, signData string, publicKey string) err
     grsa := RSASecurity{}
     grsa.SetPublicKey(publicKey)
     return grsa.VerifySignSha256WithRsa(data, signData)
+}
+
+// 使用RSAWithSHA512验证签名
+func VerifySignSha512WithRsa(data string, signData string, publicKey string) error {
+    grsa := RSASecurity{}
+    grsa.SetPublicKey(publicKey)
+    return grsa.VerifySignSha512WithRsa(data, signData)
 }
