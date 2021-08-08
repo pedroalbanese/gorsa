@@ -133,7 +133,7 @@ func (rsas *RSASecurity) SignSha256WithRsa(data string) (string, error) {
 func (rsas *RSASecurity) SignSha512WithRsa(data string) (string, error) {
 	sha256Hash := sha512.New()
 	s_data := []byte(data)
-	sha256Hash.Write(s_data)
+	sha512Hash.Write(s_data)
 	hashed := sha512Hash.Sum(nil)
 
 	signByte, err := rsa.SignPKCS1v15(rand.Reader, rsas.prikey, crypto.SHA512, hashed)
