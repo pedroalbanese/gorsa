@@ -127,6 +127,20 @@ func (rsas *RSASecurity) SignSha256WithRsa(data string) (string, error) {
 }
 
 /**
+ * 使用RSAWithSHA512算法签名
+ */
+func (rsas *RSASecurity) SignSha256WithRsa(data string) (string, error) {
+	sha256Hash := sha512.New()
+	s_data := []byte(data)
+	sha256Hash.Write(s_data)
+	hashed := sha512Hash.Sum(nil)
+
+	signByte, err := rsa.SignPKCS1v15(rand.Reader, rsas.prikey, crypto.SHA512, hashed)
+	sign := base64.StdEncoding.EncodeToString(signByte)
+	return string(sign), err
+}
+
+/**
  * 使用RSAWithSHA1验证签名
  */
 func (rsas *RSASecurity) VerifySignSha1WithRsa(data string, signData string) error {
@@ -152,3 +166,18 @@ func (rsas *RSASecurity) VerifySignSha256WithRsa(data string, signData string) e
 
 	return rsa.VerifyPKCS1v15(rsas.pubkey, crypto.SHA256, hash.Sum(nil), sign)
 }
+
+/**
+ * 使用RSAWithSHA512验证签名
+ */
+func (rsas *RSASecurity) VerifySignSha256WithRsa(data string, signData string) error {
+	sign, err := base64.StdEncoding.DecodeString(signData)
+	if err != nil {
+		return err
+	}
+	hash := sha512.New()
+	hash.Write([]byte(data))
+
+	return rsa.VerifyPKCS1v15(rsas.pubkey, crypto.SHA512, hash.Sum(nil), sign)
+}
+
