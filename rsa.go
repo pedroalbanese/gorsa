@@ -129,7 +129,7 @@ func (rsas *RSASecurity) SignSha256WithRsa(data string) (string, error) {
 /**
  * 使用RSAWithSHA512算法签名
  */
-func (rsas *RSASecurity) SignSha256WithRsa(data string) (string, error) {
+func (rsas *RSASecurity) SignSha512WithRsa(data string) (string, error) {
 	sha256Hash := sha512.New()
 	s_data := []byte(data)
 	sha256Hash.Write(s_data)
