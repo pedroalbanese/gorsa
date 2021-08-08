@@ -10,6 +10,7 @@ import (
 	"crypto"
 	"encoding/base64"
 	"crypto/sha256"
+	"crypto/sha512"
 )
 
 var RSA = &RSASecurity{}
